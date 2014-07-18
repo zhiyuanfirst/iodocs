@@ -1080,27 +1080,34 @@ app.get('/export/:project', function(req, res) {
                 });
 
             })
-            var project_file = 'public/downloads/project.md';
-            fs.unlinkSync(project_file);
-
-            //将结果保存为文件，并发送
-            async.forEachSeries(results, function(item, callback) {
-                fs.writeFile(project_file, item, {flag: 'a'}, function(err) {
-                   callback(err);
-                });
-            }, function(err) {
-                if(err) {
-                    res.json({msg: err});
+            var project_file = util.format('public/downloads/%s.md',project);
+            fs.exists(project_file, function(exists_md) {
+                if(exists_md) {
+                    fs.unlinkSync(project_file);
                 }
-                else {
-                    res.download(project_file,'project.md',function(err) {
-                        if(err) {
-                            res.json({msg: err});
-                        }
-                    })
 
-                }
+                //将结果保存为文件，并发送
+                async.forEachSeries(results, function(item, callback) {
+                    fs.writeFile(project_file, item, {flag: 'a'}, function(err) {
+                        callback(err);
+                    });
+                }, function(err) {
+                    if(err) {
+                        res.json({msg: err});
+                    }
+                    else {
+                        res.download(project_file,project + '.md',function(err) {
+                            if(err) {
+                                res.json({msg: err});
+                            }
+                        })
+
+                    }
+                })
+
             })
+
+
 
             //var project_md = results.join(endOfLine);
            // res.send(project_md);
