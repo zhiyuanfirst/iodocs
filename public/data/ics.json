@@ -1,0 +1,1988 @@
+{
+  "endpoints": [
+    {
+      "name": "Login",
+      "methods": [
+        {
+          "MethodName": "user login",
+          "Synopsis": "用户登录时的验证方法",
+          "HTTPMethod": "POST",
+          "URI": "/login",
+          "RequiresOAuth": "N",
+          "parameters": [
+            {
+              "Name": "name",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "登录用户名"
+            },
+            {
+              "Name": "password",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "登录密码"
+            }
+          ]
+        },
+        {
+          "MethodName": "get login user info",
+          "Synopsis": "获取登录用户的信息",
+          "HTTPMethod": "GET",
+          "URI": "/user_info",
+          "RequiresOAuth": "Y",
+          "parameters": [
+          ]
+        },
+        {
+          "MethodName": "user logout",
+          "Synopsis": "用户登出",
+          "HTTPMethod": "POST",
+          "URI": "/logout",
+          "RequiresOAuth": "Y",
+          "parameters": [
+          ]
+        },
+        {
+          "MethodName": "user signup",
+          "Synopsis": "用户注册",
+          "HTTPMethod": "POST",
+          "URI": "/signup",
+          "RequiresOAuth": "Y",
+          "parameters": [
+            {
+              "Name": "code",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "学号/工号"
+            },
+            {
+              "Name": "password",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "密码"
+            },
+            {
+              "Name": "re_password",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "重复密码"
+            },
+            {
+              "Name": "email",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "邮箱"
+            },
+            {
+              "Name": "name",
+              "Required": "Y",
+              "Default": "",
+              "Type": "string",
+              "Description": "姓名"
+            },
+            {
+              "Name": "user_type",
+              "Required": "Y",
+              "Default": "",
+              "Type": "int",
+              "Description": "用户类型（1：管理员，2：教职工，3：学生）"
+            },
+            {
+              "Name": "role_id",
+              "Required": "Y",
+              "Default": "",
+              "Type": "int",
+              "Description": "角色ID，默认和用户类型对应"
+            }
+
+          ]
+        },
+        {
+          "MethodName": "search password",
+          "Synopsis": "找回密码",
+          "HTTPMethod": "POST",
+          "URI": "/search_pass",
+          "RequiresOAuth": "Y",
+          "parameters": [
+              {
+                  "Name": "login_name",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "登录用户名"
+              }
+          ]
+        },
+        {
+          "MethodName": "reset password",
+          "Synopsis": "重置密码",
+          "HTTPMethod": "POST",
+          "URI": "/reset_pass",
+          "RequiresOAuth": "Y",
+          "parameters": [
+              {
+                  "Name": "token",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "Token"
+              },
+              {
+                  "Name": "login_name",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "登录用户名"
+              },
+              {
+                  "Name": "password",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "密码"
+              },
+              {
+                  "Name": "re_password",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "重复密码"
+              }
+          ]
+        },
+        {
+          "MethodName": "valid token",
+          "Synopsis": "重置密码验证",
+          "HTTPMethod": "POST",
+          "URI": "/valid_token",
+          "RequiresOAuth": "Y",
+          "parameters": [
+              {
+                  "Name": "login_name",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "登录用户名"
+              },
+              {
+                  "Name": "token",
+                  "Required": "Y",
+                  "Default": "",
+                  "Type": "string",
+                  "Description": "登录用户名"
+              }
+          ]
+        }
+      ]
+    },
+    {
+        "name": "Users",
+        "methods": [
+            {
+                "MethodName": "get users",
+                "Synopsis": "获取所有用户",
+                "HTTPMethod": "GET",
+                "URI": "/users",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                ]
+            },
+            {
+                "MethodName": "get users for type",
+                "Synopsis": "获取指定类型的用户",
+                "HTTPMethod": "GET",
+                "URI": "/users/:type",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"用户类型（1：管理员，2：教职工，3：学生）"
+                    }
+                ]
+            },
+            {
+                "MethodName": "search users for type",
+                "Synopsis": "获取指定类型的用户",
+                "HTTPMethod": "GET",
+                "URI": "/users/:type/search",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"用户类型（1：管理员，2：教职工，3：学生）"
+                    },
+                    {
+                        "Name":"keyword",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"搜索关键字"
+                    },
+                    {
+                        "Name":"currentPage",
+                        "Required":"Y",
+                        "Default":"1",
+                        "Type":"int",
+                        "Description":"当前页"
+                    },
+                    {
+                        "Name":"pageSize",
+                        "Required":"Y",
+                        "Default":"20",
+                        "Type":"int",
+                        "Description":"每页大小"
+                    },
+                    {
+                        "Name":"sortFields",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"排序字段"
+                    },
+                    {
+                        "Name":"sortDirections",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"排序方式"
+                    }
+                ]
+            },
+            {
+                "MethodName": "import users for type",
+                "Synopsis": "excel导入指定类型的用户",
+                "HTTPMethod": "POST",
+                "URI": "/users/:type/import",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"用户类型（1：管理员，2：教职工，3：学生）"
+                    },
+                    {
+                        "Name":"results",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"用户列表json"
+                    }
+                ]
+            },
+            {
+                "MethodName": "import users preview for type",
+                "Synopsis": "excel导入指定类型的用户进行预览",
+                "HTTPMethod": "POST",
+                "URI": "/users/:type/import",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"用户类型（1：管理员，2：教职工，3：学生）"
+                    },
+                    {
+                        "Name":"excel",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"file",
+                        "Description":"上传按钮"
+                    }
+                ]
+            },
+            {
+                "MethodName": "exports users for type",
+                "Synopsis": "导出指定类型的用户到excel",
+                "HTTPMethod": "GET",
+                "URI": "/users/:type/export",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"用户类型（1：管理员，2：教职工，3：学生）"
+                    },
+                    {
+                        "Name":"keyword",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"搜索关键字，作为过滤条件"
+                    }
+                ]
+            },
+            {
+                "MethodName": "disable/enable user",
+                "Synopsis": "启用禁用用户",
+                "HTTPMethod": "POST",
+                "URI": "/users/:id/enable",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"id",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"user id"
+                    },
+                    {
+                        "Name":"is_disable",
+                        "Required":"Y",
+                        "Default":"0",
+                        "Type":"int",
+                        "Description":"是否禁用"
+                    }
+                ]
+            },
+            {
+                "MethodName": "reset password for user",
+                "Synopsis": "重置用户密码",
+                "HTTPMethod": "POST",
+                "URI": "/users/:id/reset_password",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"id",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"user id"
+                    },
+                    {
+                        "Name":"login_name",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"登录用户名"
+                    },
+                    {
+                        "Name":"password",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"登录密码"
+                    }
+                ]
+            },
+            {
+                "MethodName": "delete user",
+                "Synopsis": "删除用户",
+                "HTTPMethod": "POST",
+                "URI": "/users/:id/delete",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"id",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"user id"
+                    }
+                ]
+            },
+            {
+                "MethodName": "update user",
+                "Synopsis": "修改用户信息",
+                "HTTPMethod": "POST",
+                "URI": "/users/:id/update",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"id",
+                        "Required":"Y",
+                        "Default":"3",
+                        "Type":"int",
+                        "Description":"user id"
+                    },
+                    {
+                        "Name":"name",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"姓名"
+                    },
+                    {
+                        "Name":"mobile",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"手机号"
+                    },
+                    {
+                        "Name":"gender",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"性别"
+                    },
+                    {
+                        "Name":"employed_date",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"int",
+                        "Description":"雇佣/入学时间"
+                    },
+                    {
+                        "Name":"political_status",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"政治面貌"
+                    },
+                    {
+                        "Name":"id_card",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"身份证号"
+                    },
+                    {
+                        "Name":"birthday",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"int",
+                        "Description":"生日"
+                    },
+                    {
+                        "Name":"dormitory",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"宿舍"
+                    },
+                    {
+                        "Name":"class",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"班级"
+                    },
+                    {
+                        "Name":"nation",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"民族"
+                    },
+                    {
+                        "Name":"title",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"职称"
+                    },
+                    {
+                        "Name":"part",
+                        "Required":"Y",
+                        "Default":"",
+                        "Type":"string",
+                        "Description":"单位"
+                    }
+                ]
+            }
+
+        ]
+    },
+      {
+          "name": "Org",
+          "methods": [
+              {
+                  "MethodName": "get org for type",
+                  "Synopsis": "获取指定类型的用户",
+                  "HTTPMethod": "GET",
+                  "URI": "/org/:type",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "add or update org for type",
+                  "Synopsis": "添加/更新组织机构项",
+                  "HTTPMethod": "POST",
+                  "URI": "/org/:type/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"名称"
+                      },
+                      {
+                          "Name":"parent",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"parent id"
+                      },
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"org id"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "delete item",
+                  "Synopsis": "删除一项组织机构",
+                  "HTTPMethod": "POST",
+                  "URI": "/org/delete/:id",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"org id"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "download org template",
+                  "Synopsis": "下载组织机构模板",
+                  "HTTPMethod": "GET",
+                  "URI": "/org/:type/template",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "import org",
+                  "Synopsis": "根据模板，导入组织机构",
+                  "HTTPMethod": "POST",
+                  "URI": "/org/:type/import",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      },
+                      {
+                          "Name":"results",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"org list json"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "import preview org",
+                  "Synopsis": "导入预览组织机构",
+                  "HTTPMethod": "POST",
+                  "URI": "/org/:type/import_preview",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      },
+                      {
+                          "Name":"excel",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"file",
+                          "Description":"上传按钮"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "search org users",
+                  "Synopsis": "搜索组织机构下得用户",
+                  "HTTPMethod": "GET",
+                  "URI": "/org/:type/users",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"用户类型（1：教职工，2：学生）"
+                      },
+                      {
+                          "Name":"keyword",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"关键字（学(工)号/姓名/手机）"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "get org members",
+                  "Synopsis": "获取组织机构下得用户",
+                  "HTTPMethod": "GET",
+                  "URI": "/org/:id/members",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"组织机构id"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Permission",
+          "methods": [
+              {
+                  "MethodName": "get premission",
+                  "Synopsis": "获取权限",
+                  "HTTPMethod": "GET",
+                  "URI": "/permission/:type",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"角色（1：管理员，2：教职工,3:学生）"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "update premission",
+                  "Synopsis": "设置用户权限",
+                  "HTTPMethod": "POST",
+                  "URI": "/permission/:type",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"角色（1：管理员，2：教职工,3:学生）"
+                      },
+                      {
+                          "Name":"config",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"用户配置的权限item"
+                      }
+
+                  ]
+              }
+
+          ]
+      },
+      {
+          "name": "System Config",
+          "methods": [
+              {
+                  "MethodName": "config sms",
+                  "Synopsis": "配置sms",
+                  "HTTPMethod": "GET",
+                  "URI": "/sys_config/sms",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+
+                  ]
+              },
+              {
+                  "MethodName": "config email",
+                  "Synopsis": "配置email",
+                  "HTTPMethod": "GET",
+                  "URI": "/sys_config/email",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+
+                  ]
+              },
+              {
+                  "MethodName": "config check update",
+                  "Synopsis": "配置更新检查",
+                  "HTTPMethod": "GET",
+                  "URI": "/sys_config/check_update",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+
+                  ]
+              },
+              {
+                  "MethodName": "config sms",
+                  "Synopsis": "配置sms",
+                  "HTTPMethod": "POST",
+                  "URI": "/sys_config/sms",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"provider",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"服务提供商"
+                      },
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"用户名"
+                      },
+                      {
+                          "Name":"password",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"密码"
+                      },
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"状态(0:禁用，1：启用)"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "config email",
+                  "Synopsis": "配置email",
+                  "HTTPMethod": "POST",
+                  "URI": "/sys_config/email",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"nickname",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"昵称"
+                      },
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"用户名"
+                      },
+                      {
+                          "Name":"password",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"密码"
+                      },
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"状态(0:禁用，1：启用)"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "config check update",
+                  "Synopsis": "配置更新检查",
+                  "HTTPMethod": "POST",
+                  "URI": "/sys_config/check_update",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"状态(0:禁用，1：启用)"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Notification",
+          "methods": [
+              {
+                  "MethodName": "notify list",
+                  "Synopsis": "通知列表",
+                  "HTTPMethod": "GET",
+                  "URI": "/notify/:user/:status/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"0",
+                          "Type":"int",
+                          "Description":"状态(0:未读，1：已读)"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "notify count",
+                  "Synopsis": "通知列表",
+                  "HTTPMethod": "GET",
+                  "URI": "/notify/:user/:status/count",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"0",
+                          "Type":"int",
+                          "Description":"状态(0:未读，1：已读)"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "UserConfig",
+          "methods": [
+              {
+                  "MethodName": "user config",
+                  "Synopsis": "更新用户信息",
+                  "HTTPMethod": "POST",
+                  "URI": "/user/:id/config",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"3",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"姓名"
+                      },
+                      {
+                          "Name":"mobile",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"手机号"
+                      },
+                      {
+                          "Name":"gender",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"性别"
+                      },
+                      {
+                          "Name":"employed_date",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"雇佣/入学时间"
+                      },
+                      {
+                          "Name":"political_status",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"政治面貌"
+                      },
+                      {
+                          "Name":"id_card",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"身份证号"
+                      },
+                      {
+                          "Name":"qq",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"qq"
+                      },
+                      {
+                          "Name":"contact",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"联系方式"
+                      },
+                      {
+                          "Name":"birthday",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"生日"
+                      },
+                      {
+                          "Name":"dormitory",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"宿舍"
+                      },
+                      {
+                          "Name":"class",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"班级"
+                      },
+                      {
+                          "Name":"nation",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"民族"
+                      },
+                      {
+                          "Name":"title",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"职称"
+                      },
+                      {
+                          "Name":"part",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"单位"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "bind config",
+                  "Synopsis": "绑定手机邮箱",
+                  "HTTPMethod": "POST",
+                  "URI": "/user/:id/config/bind",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"mobile",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"手机号"
+                      },
+                      {
+                          "Name":"email",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"email"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "modify password",
+                  "Synopsis": "修改密码",
+                  "HTTPMethod": "POST",
+                  "URI": "/user/:id/config/password",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"password",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"原密码"
+                      },
+                      {
+                          "Name":"new_password",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"新密码"
+                      },
+                      {
+                          "Name":"re_new_password",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"重复新密码"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "user config",
+                  "Synopsis": "用户信息",
+                  "HTTPMethod": "GET",
+                  "URI": "/user/:id/config",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "bind config",
+                  "Synopsis": "用户信息",
+                  "HTTPMethod": "GET",
+                  "URI": "/user/:id/config/bind",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Templates",
+          "methods": [
+              {
+                  "MethodName": "recently use templates",
+                  "Synopsis": "最近使用的模板",
+                  "HTTPMethod": "GET",
+                  "URI": "/templates/:user/recently",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "I created templates",
+                  "Synopsis": "我创建的模板",
+                  "HTTPMethod": "GET",
+                  "URI": "/templates/:user/my",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "public templates",
+                  "Synopsis": "公开的模板",
+                  "HTTPMethod": "GET",
+                  "URI": "/templates/public",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+
+                  ]
+              },
+              {
+                  "MethodName": "new template",
+                  "Synopsis": "新建模板",
+                  "HTTPMethod": "POST",
+                  "URI": "/templates/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"模板名称"
+                      },
+                      {
+                          "Name":"desc",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"描述"
+                      },
+                      {
+                          "Name":"owner",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"拥有者"
+                      },
+                      {
+                          "Name":"property",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"配置的属性"
+                      },
+                      {
+                          "Name":"stat",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"统计的规则"
+                      },
+                      {
+                          "Name":"theme_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"theme id"
+                      },
+                      {
+                          "Name":"theme_name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"theme name"
+                      },
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"模板类型(1：通用模板，2：定制模板)"
+                      },
+                      {
+                          "Name":"is_public",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"模板是否公开(0：私有，1：公开)"
+                      }
+
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Themes",
+          "methods": [
+              {
+                  "MethodName": "get themes",
+                  "Synopsis": "public themes list",
+                  "HTTPMethod": "GET",
+                  "URI": "/themes",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+
+                  ]
+              },
+              {
+                  "MethodName": "get theme for id",
+                  "Synopsis": "根据ID获取Theme",
+                  "HTTPMethod": "GET",
+                  "URI": "/themes/:id",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"theme id"
+                      }
+
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Tasks",
+          "methods": [
+              {
+                  "MethodName": "I created tasks",
+                  "Synopsis": "我创建的任务",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/my",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "I created tasks",
+                  "Synopsis": "我创建的任务",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/my",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "I created tasks for id",
+                  "Synopsis": "我创建的单个任务",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/my/:id",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "show my created tasks list",
+                  "Synopsis": "我创建的任务列表",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "search tasks",
+                  "Synopsis": "搜索任务",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/search/:status/:begin_time/:end_time/:name",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"任务状态（0：待启动，1：进行中，2：已完成，3：已禁用）"
+                      },
+                      {
+                          "Name":"begin_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"开始时间"
+                      },
+                      {
+                          "Name":"end_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"结束时间"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务名称"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "show my tasks list for status",
+                  "Synopsis": "根据状态展示我的任务列表",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/list/:status",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"status",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"任务状态（0：待启动，1：进行中，2：已完成，3：已禁用）"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user process task",
+                  "Synopsis": "用户做任务",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:user/process/:id",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"answer",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"answer"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "create task",
+                  "Synopsis": "创建任务",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:user/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"creator_name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"创建者姓名"
+                      },
+                      {
+                          "Name":"creator_depart",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"创建者单位"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务名称"
+                      },
+                      {
+                          "Name":"type",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"类型（1：匿名，2：有指派对象，3：有指派对象，但不记名）"
+                      },
+                      {
+                          "Name":"tpl_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"模板id"
+                      },
+                      {
+                          "Name":"start_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"有效开始时间"
+                      },
+                      {
+                          "Name":"end_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"有效结束时间"
+                      },
+                      {
+                          "Name":"is_repeat",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"是否是重复任务（0：不是，1：是）"
+                      },
+                      {
+                          "Name":"rules",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务规则"
+                      },
+                      {
+                          "Name":"receivers",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"接收对象"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "get task details",
+                  "Synopsis": "任务详细",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:id/detail",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "delete task",
+                  "Synopsis": "删除任务",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:id/delete",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "update task status",
+                  "Synopsis": "更新任务状态",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/status/:is_enabled",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"is_enabled",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"启用禁用任务（1：进行中，3：禁用）"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "update valid datetime",
+                  "Synopsis": "更新有效时间",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/info/update",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"start_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"开始时间"
+                      },
+                      {
+                          "Name":"end_time",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"结束时间"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "task receivers add",
+                  "Synopsis": "添加任务接受者",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/receiver/add",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"receivers",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务接收者"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "task receivers delete",
+                  "Synopsis": "删除任务接收者",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/receiver/delete",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"receivers",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务接收者"
+                      }
+
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Comments",
+          "methods": [
+              {
+                  "MethodName": "get task comments",
+                  "Synopsis": "获取任务评论",
+                  "HTTPMethod": "GET",
+                  "URI": "/comments/:task_id",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"task_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "new task comment",
+                  "Synopsis": "新建任务评论",
+                  "HTTPMethod": "POST",
+                  "URI": "/comments/:task_id/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"task_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"author_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"评论人id"
+                      },
+                      {
+                          "Name":"author_name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"评论人名称"
+                      },
+                      {
+                          "Name":"reply_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"回复的评论ID（0：直接给任务评论，1：回复某条评论）"
+                      },
+                      {
+                          "Name":"content",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"评论内容"
+                      },
+                      {
+                          "Name":"ip",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"客户端ip"
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Files",
+          "methods": [
+              {
+                  "MethodName": "user collect files",
+                  "Synopsis": "用户收集的文件",
+                  "HTTPMethod": "GET",
+                  "URI": "/files/:user/collect/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"task_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user upload files",
+                  "Synopsis": "用户上传的文件",
+                  "HTTPMethod": "GET",
+                  "URI": "/files/:user/upload/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"task_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user collect files",
+                  "Synopsis": "用户创建的文件",
+                  "HTTPMethod": "GET",
+                  "URI": "/files/:user/folder/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"parent_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"folder id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user create folder",
+                  "Synopsis": "用户新建目录",
+                  "HTTPMethod": "POST",
+                  "URI": "/files/:user/folder/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"parent_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"folder id"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"目录名"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user upload file",
+                  "Synopsis": "用户上传文件",
+                  "HTTPMethod": "POST",
+                  "URI": "/files/:user/upload",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"parent_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"folder id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "user upload file in task",
+                  "Synopsis": "用户在任务中上传文件",
+                  "HTTPMethod": "POST",
+                  "URI": "/files/:user/task/:user_task_id/upload",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"user_task_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user task id"
+                      }
+
+                  ]
+              }
+          ]
+      },
+      {
+          "name": "Tags",
+          "methods": [
+              {
+                  "MethodName": "new tag",
+                  "Synopsis": "新建标签",
+                  "HTTPMethod": "POST",
+                  "URI": "/tags/:user/new",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"tag",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"tag name"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "get user tag list",
+                  "Synopsis": "获取用户标签",
+                  "HTTPMethod": "GET",
+                  "URI": "/tags/:user/list",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "get tag relation user info",
+                  "Synopsis": "获取标签关联的用户信息",
+                  "HTTPMethod": "GET",
+                  "URI": "/tags/:user/:id/user_info",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"tag id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "add tag relation user",
+                  "Synopsis": "添加标签关联的用户",
+                  "HTTPMethod": "POST",
+                  "URI": "/tags/:id/relation/user_tasks",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"tag id"
+                      },
+                      {
+                          "Name":"user_tasks",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"用户标签json"
+                      }
+
+                  ]
+              }
+          ]
+      }
+  ]
+}

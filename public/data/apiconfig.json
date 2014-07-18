@@ -1,4 +1,13 @@
 {
+    "ics": {
+        "name": "ics beta API",
+        "protocol": "http",
+        "baseURL": "localhost:3000",
+        "publicPath": "/api",
+        "headers" : {},
+        "auth": "key",
+        "keyParam": "key"
+    },
     "klout": {
         "name": "Klout v2 API",
         "protocol": "http",
