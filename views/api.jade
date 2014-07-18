@@ -60,6 +60,8 @@ block content
               a#toggle-endpoints(href='#') Toggle All Endpoints
           li
               a#toggle-methods(href='#') Toggle All Methods
+          li
+              a(href='/export/' + apiName) Export Api Document
 
   ul
       - each endpoint in apiDefinition.endpoints
