@@ -38,6 +38,9 @@ var express     = require('express'),
     clone       = require('clone'),
     redis       = require('redis'),
     RedisStore  = require('connect-redis')(express);
+var markdown = require( "markdown" ).markdown;
+var async = require('async');
+
 
 // Add minify to the JSON object
 JSON.minify = JSON.minify || require("node-json-minify");
@@ -1028,6 +1031,89 @@ app.get('/oauth2Success/:api', oauth2Success, function(req, res) {
 app.post('/upload', function(req, res) {
   res.redirect('back');
 });
+
+app.get('/export/:project', function(req, res) {
+    var project = req.params.project.toString();
+    var endOfLine = require('os').EOL;
+    console.log("project:" + project);
+    var file_path = path.join(config.apiConfigDir, project + '.json');
+    fs.exists(file_path, function(exists) {
+        if(exists) {
+            var results = [];
+            var title = "# " + project + "\n\n";
+            results.push(title);
+            var module_template = "## %s \n\n";
+            var method_template = "#### %s \n\n" +
+                "> %s \n\n" +
+                "``` \n" +
+                "Method: %s, URI: %s \n" +
+                "``` \n";
+
+            var parameters_template = "Parameter | Type | Default | Description \n" +
+                "--------| -----------|------- |--------- \n";
+
+
+            //导出项目api文档
+            var api = JSON.parse(JSON.minify(fs.readFileSync(file_path, 'utf8')));
+
+            var endpoints = api.endpoints;
+            endpoints.forEach(function(endpoint) {
+                var name = endpoint.name;
+                results.push(util.format(module_template, name));
+
+                var methods = endpoint.methods;
+                methods.forEach(function(method) {
+                    //添加method
+                    results.push(util.format(method_template, method.MethodName,method.Synopsis,method.HTTPMethod,method.URI));
+
+                    //添加paramters
+                    if(method.parameters) {
+                        results.push(parameters_template);
+                        method.parameters.forEach(function(parameter) {
+                           //添加parameter
+                           results.push(util.format("%s | %s | %s| %s \n", parameter.Name,parameter.Type,parameter.Default,parameter.Description));
+                        });
+                        if(method.parameters && method.parameters.length == 0) {
+                            results.push("  | \n");
+                        }
+                    }
+                });
+
+            })
+            var project_file = 'public/downloads/project.md';
+            fs.unlinkSync(project_file);
+
+            //将结果保存为文件，并发送
+            async.forEachSeries(results, function(item, callback) {
+                fs.writeFile(project_file, item, {flag: 'a'}, function(err) {
+                   callback(err);
+                });
+            }, function(err) {
+                if(err) {
+                    res.json({msg: err});
+                }
+                else {
+                    res.download(project_file,'project.md',function(err) {
+                        if(err) {
+                            res.json({msg: err});
+                        }
+                    })
+
+                }
+            })
+
+            //var project_md = results.join(endOfLine);
+           // res.send(project_md);
+
+        }
+        else {
+            res.json({msg: '项目不存在'});
+        }
+    })
+
+
+})
+
 
 // API shortname, all lowercase
 app.get('/:api([^\.]+)', function(req, res) {
