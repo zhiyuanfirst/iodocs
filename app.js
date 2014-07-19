@@ -1049,7 +1049,7 @@ app.get('/export/:project', function(req, res) {
                 "Method: %s, URI: %s \n" +
                 "``` \n";
 
-            var parameters_template = "Parameter | Type | Default | Description \n" +
+            var parameters_template = "参数 | 类型 | 默认值 | 描述 \n" +
                 "--------| -----------|------- |--------- \n";
 
 
