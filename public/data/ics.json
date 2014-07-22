@@ -1353,9 +1353,16 @@
                   "MethodName": "search tasks",
                   "Synopsis": "搜索任务",
                   "HTTPMethod": "GET",
-                  "URI": "/tasks/search/:status/:begin_time/:end_time/:name",
+                  "URI": "/tasks/:user/search",
                   "RequiresOAuth": "Y",
                   "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
                       {
                           "Name":"status",
                           "Required":"Y",
