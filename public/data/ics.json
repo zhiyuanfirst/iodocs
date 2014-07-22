@@ -1665,6 +1665,30 @@
                       }
 
                   ]
+              },
+              {
+                  "MethodName": "get task receivers history ",
+                  "Synopsis": "获取任务接收者历史",
+                  "HTTPMethod": "GET",
+                  "URI": "/tasks/:user/history",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"tpl_id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"模板id"
+                      }
+
+                  ]
               }
           ]
       },
