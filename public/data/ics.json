@@ -1685,6 +1685,30 @@
                   ]
               },
               {
+                  "MethodName": "update task name",
+                  "Synopsis": "更新任务名称",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/name/update",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"name",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务名称"
+                      }
+
+                  ]
+              },
+              {
                   "MethodName": "task receivers add",
                   "Synopsis": "添加任务接受者",
                   "HTTPMethod": "POST",
