@@ -1768,7 +1768,7 @@
                           "Required":"Y",
                           "Default":"",
                           "Type":"int",
-                          "Description":"user id"
+                          "Description":"任务 id"
                       },
                       {
                           "Name":"currentPage",
