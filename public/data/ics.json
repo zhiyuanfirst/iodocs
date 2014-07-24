@@ -383,6 +383,22 @@
                 ]
             },
             {
+                "MethodName": "download users template",
+                "Synopsis": "下载用户模板",
+                "HTTPMethod": "GET",
+                "URI": "/users/:type/template",
+                "RequiresOAuth": "Y",
+                "parameters": [
+                    {
+                        "Name":"type",
+                        "Required":"Y",
+                        "Default":"1",
+                        "Type":"int",
+                        "Description":"用户类型（1：教职工，2：学生）"
+                    }
+                ]
+            },
+            {
                 "MethodName": "delete user",
                 "Synopsis": "删除用户",
                 "HTTPMethod": "POST",
@@ -893,6 +909,22 @@
                           "Default":"0",
                           "Type":"int",
                           "Description":"状态(0:未读，1：已读)"
+                      }
+                  ]
+              },
+              {
+                  "MethodName": "set notify status to read",
+                  "Synopsis": "设置当前通知状态为已读",
+                  "HTTPMethod": "POST",
+                  "URI": "/notify/:id/status/read",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"notify id"
                       }
                   ]
               }
