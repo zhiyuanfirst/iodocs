@@ -1823,9 +1823,62 @@
                           "Description":"排序方式"
                       }
                   ]
+              },
+              {
+                  "MethodName": "set user task status ",
+                  "Synopsis": "设置用户任务的完成状态",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/:user/status",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
+                      },
+                      {
+                          "Name":"is_enable",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"启用/禁用状态(1 or 3)"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "delete user task  ",
+                  "Synopsis": "删除用户分派的任务",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/users/delete",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"users",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"user id"
+                      }
+
+                  ]
               }
-
-
           ]
       },
       {
