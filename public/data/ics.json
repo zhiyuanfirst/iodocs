@@ -955,6 +955,13 @@
                           "Description":"姓名"
                       },
                       {
+                          "Name":"code",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"学号/工号"
+                      },
+                      {
                           "Name":"mobile",
                           "Required":"Y",
                           "Default":"",
@@ -1015,35 +1022,57 @@
                           "Required":"Y",
                           "Default":"",
                           "Type":"string",
-                          "Description":"宿舍"
+                          "Description":"宿舍(学生字段)"
                       },
                       {
                           "Name":"class",
                           "Required":"Y",
                           "Default":"",
                           "Type":"string",
-                          "Description":"班级"
+                          "Description":"班级（学生字段）"
                       },
+                      {
+                          "Name":"major",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"专业（学生字段）"
+                      },
+
                       {
                           "Name":"nation",
                           "Required":"Y",
                           "Default":"",
                           "Type":"string",
-                          "Description":"民族"
+                          "Description":"民族（学生字段）"
                       },
                       {
                           "Name":"title",
                           "Required":"Y",
                           "Default":"",
                           "Type":"string",
-                          "Description":"职称"
+                          "Description":"职称（教职工字段）"
                       },
                       {
                           "Name":"part",
                           "Required":"Y",
                           "Default":"",
                           "Type":"string",
-                          "Description":"单位"
+                          "Description":"单位（教职工字段）"
+                      },
+                      {
+                          "Name":"first_degree",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"学位（教职工字段）"
+                      },
+                      {
+                          "Name":"first_education",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"学历（教职工字段）"
                       }
                   ]
               },
