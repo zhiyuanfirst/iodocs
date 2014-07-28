@@ -1741,7 +1741,7 @@
                   "MethodName": "task receivers add",
                   "Synopsis": "添加任务接受者",
                   "HTTPMethod": "POST",
-                  "URI": "/tasks/:id/receiver/add",
+                  "URI": "/tasks/:id/:user/receiver/add",
                   "RequiresOAuth": "Y",
                   "parameters": [
                       {
@@ -1750,6 +1750,13 @@
                           "Default":"",
                           "Type":"int",
                           "Description":"task id"
+                      },
+                      {
+                          "Name":"user",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"user id"
                       },
                       {
                           "Name":"receivers",
@@ -1904,6 +1911,44 @@
                           "Default":"",
                           "Type":"string",
                           "Description":"user id"
+                      }
+
+                  ]
+              },
+              {
+                  "MethodName": "send create task messages for distribution users ",
+                  "Synopsis": "创建任务后，为分派用户发送通知消息",
+                  "HTTPMethod": "POST",
+                  "URI": "/tasks/:id/users/message",
+                  "RequiresOAuth": "Y",
+                  "parameters": [
+                      {
+                          "Name":"id",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"int",
+                          "Description":"task id"
+                      },
+                      {
+                          "Name":"task_url",
+                          "Required":"Y",
+                          "Default":"",
+                          "Type":"string",
+                          "Description":"任务url"
+                      },
+                      {
+                          "Name":"is_email",
+                          "Required":"Y",
+                          "Default":"1",
+                          "Type":"int",
+                          "Description":"是否发送邮件(1 or 0)"
+                      },
+                      {
+                          "Name":"is_sms",
+                          "Required":"Y",
+                          "Default":"0",
+                          "Type":"int",
+                          "Description":"是否发送短信(1 or 0)"
                       }
 
                   ]
